@@ -14,11 +14,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [imdbUrl, setImdbUrl] = useState('');
   const [imdbId, setImdbId] = useState('');
 
+  const [isFormValid, setIsFormValid] = useState(true);
   const [isImgUrlValid, setIsImgUrlValid] = useState(true);
   const [isImdbUrlValid, setIsImdbUrlValid] = useState(true);
-
-  const isFormValid =
-    title !== '' && imgUrl !== '' && imdbUrl !== '' && imdbId !== '';
 
   const pattern = new RegExp(
     '^(' +
@@ -32,9 +30,12 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    const FormValid =
+      title !== '' && imgUrl !== '' && imdbUrl !== '' && imdbId !== '';
     const imgUrlValid = pattern.test(imgUrl);
     const imdbUrlValid = pattern.test(imdbUrl);
 
+    setIsFormValid(FormValid);
     setIsImgUrlValid(imgUrlValid);
     setIsImdbUrlValid(imdbUrlValid);
 
